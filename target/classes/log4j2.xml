@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="ConsoleBase" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <Filters>
+    	<ThresholdFilter level="error"/>
+  	   </Filters>
+    </Console>
+    <Console name="ConsoleInfo" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss} - %-5level- %msg%n"/>
+       <Filters>
+    	<ThresholdFilter level="info"/>
+  	   </Filters>
+    </Console>
+  </Appenders>
+  <Loggers>
+	  <Logger name="MegaSena" level="info">
+		  <AppenderRef ref="ConsoleInfo"/>
+	  </Logger>
+	  <Logger level="info">
+		  <AppenderRef ref="ConsoleInfo"/>
+	  </Logger>
+	  <Logger level="info">
+		  <AppenderRef ref="ConsoleInfo"/>
+	  </Logger>
+	  <Logger level="info">
+		  <AppenderRef ref="ConsoleInfo"/>
+	  </Logger>
+    <Root level="error">
+      <AppenderRef ref="ConsoleBase"/>
+    </Root >
+  </Loggers>
+</Configuration>
