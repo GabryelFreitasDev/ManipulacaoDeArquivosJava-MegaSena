@@ -20,11 +20,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/java/MegaSena/Mega-Sena.xlsx</name>
-			<type>1</type>
-			<location>C:/Users/Gabryel/Downloads/Mega-Sena.xlsx</location>
-		</link>
-	</linkedResources>
 </projectDescription>

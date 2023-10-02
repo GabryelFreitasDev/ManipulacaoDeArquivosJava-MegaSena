@@ -18,15 +18,6 @@
 	  <Logger name="MegaSena" level="info">
 		  <AppenderRef ref="ConsoleInfo"/>
 	  </Logger>
-	  <Logger level="info">
-		  <AppenderRef ref="ConsoleInfo"/>
-	  </Logger>
-	  <Logger level="info">
-		  <AppenderRef ref="ConsoleInfo"/>
-	  </Logger>
-	  <Logger level="info">
-		  <AppenderRef ref="ConsoleInfo"/>
-	  </Logger>
     <Root level="error">
       <AppenderRef ref="ConsoleBase"/>
     </Root >

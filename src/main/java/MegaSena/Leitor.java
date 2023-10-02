@@ -14,13 +14,15 @@ import java.util.Random;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Leitor {
-	//private final Logger log = LogManager.getLogger(Leitor.class);
+	private final Logger log = LogManager.getLogger(Leitor.class);
 	private BufferedInputStream bufXlsxMegaSena;
 	private List<Dados> listaDados = new ArrayList<>();
 	private int quantidadeGanhadores = 0;
@@ -33,10 +35,11 @@ public class Leitor {
 	
 	public void inicializaXlsxMegaSena() {
 		 try {
+				log.info("Iniciando a leitura dos registros...");
+
 			 	XSSFWorkbook workBook = new XSSFWorkbook(bufXlsxMegaSena);
 	            Sheet sheet = workBook.getSheetAt(0);
 	            
-	            //log.info("Aberto arquivo .xlsx da Mega Sena.\nSerá iniciada a leitura de registro a registro");
 	            Iterator<?> linhas = sheet.rowIterator();
 	            boolean primeiraLinha = true;
 	            while (linhas.hasNext()) {
@@ -83,12 +86,11 @@ public class Leitor {
 	                listaDados.add(dado);
 	            }
 	            workBook.close();
-	            //log.info("Leitura dos dados da Mega Sena concluído com sucesso.");
+	            log.info("Leitura dos dados da Mega Sena concluído com sucesso.");
 	        } catch (Exception e) {
-	            //JOptionPane.showMessageDialog(null, e);
 	            System.out.println(e);
-	            //log.debug("Deu erro no arquivo XLS dos Analistas");
-	            //log.debug(e.getMessage());
+	            log.debug("Erro na leitura dos registros");
+	            log.debug(e.getMessage());
 	        }
 	}
 	
@@ -111,7 +113,7 @@ public class Leitor {
 		        .collect(Collectors.toList());
 	}
 	
-	public int getQuantosConcursosNaoHouveApostadorQueAcertou6Dezenas() {
+	public int getQuantidadeConcursosNaoHouveApostadorQueAcertou6Dezenas() {
 		return (int)listaDados.stream().filter(x -> (int)Float.parseFloat(x.getGanhadores6Acertos()) == 0).count();
 	}
 	
@@ -119,13 +121,13 @@ public class Leitor {
 		List<BigDecimal> valoresPagos = new ArrayList<>();
 		switch(QuantidadeDezenas) {
 			case 4:
-				listaDados.forEach(x -> valoresPagos.add(trataValorBigDecimal(x.getRateio4Acertos())));
+				listaDados.forEach(x -> valoresPagos.add(Util.formataStringParaBigDecimal(x.getRateio4Acertos())));
 				break;
 			case 5:
-				listaDados.forEach(x -> valoresPagos.add(trataValorBigDecimal(x.getRateio5Acertos())));
+				listaDados.forEach(x -> valoresPagos.add(Util.formataStringParaBigDecimal(x.getRateio5Acertos())));
 				break;
 			case 6:
-				listaDados.forEach(x -> valoresPagos.add(trataValorBigDecimal(x.getRateio6Acertos())));
+				listaDados.forEach(x -> valoresPagos.add(Util.formataStringParaBigDecimal(x.getRateio6Acertos())));
 				break;
 		}			
 		
@@ -139,13 +141,13 @@ public class Leitor {
 		quantidadeGanhadores = 0;
 		switch(QuantidadeDezenas) {
 			case 4:
-				listaDados.forEach(x -> quantidadeGanhadores += (trataValorInt(x.getGanhadores4Acertos())));
+				listaDados.forEach(x -> quantidadeGanhadores += (Util.formataStringParaInt(x.getGanhadores4Acertos())));
 				break;
 			case 5:
-				listaDados.forEach(x -> quantidadeGanhadores += (trataValorInt(x.getGanhadores5Acertos())));
+				listaDados.forEach(x -> quantidadeGanhadores += (Util.formataStringParaInt(x.getGanhadores5Acertos())));
 				break;
 			case 6:
-				listaDados.forEach(x -> quantidadeGanhadores += (trataValorInt(x.getGanhadores6Acertos())));
+				listaDados.forEach(x -> quantidadeGanhadores += (Util.formataStringParaInt(x.getGanhadores6Acertos())));
 				break;
 		}
 		
@@ -153,7 +155,7 @@ public class Leitor {
 	}
 	
 	public List<Dados> getDezenasJaSorteadas(List<Integer> dezenas) {
-		List<Dados> dezenaSorteada = listaDados.stream().filter(x -> trataValoresInt(x.getBolas()).equals(dezenas)).toList();
+		List<Dados> dezenaSorteada = listaDados.stream().filter(x -> Util.formataListStringParaListInt(x.getBolas()).equals(dezenas)).toList();
 		return dezenaSorteada;
 	}
 	
@@ -168,20 +170,5 @@ public class Leitor {
 		dezenasAleatoriasParaSorteio.add(random.nextInt(60) + 1);
 		
 		return dezenasAleatoriasParaSorteio;
-	}
-	
-	private BigDecimal trataValorBigDecimal(String valor) {
-		valor = valor.replace("R$", "").replace(".", "").replace(",", ".");
-		return BigDecimal.valueOf(Double.valueOf(valor));	
-	}
-	
-	private int trataValorInt(String valor) {
-		return (int)Float.parseFloat(valor);
-	}
-	private List<Integer> trataValoresInt(List<String> valores) {
-		List<Integer> listaValoresConvertidos = new ArrayList<>();
-		valores.forEach(x -> listaValoresConvertidos.add((int)Float.parseFloat(x)));
-		
-		return listaValoresConvertidos;
 	}
 }
