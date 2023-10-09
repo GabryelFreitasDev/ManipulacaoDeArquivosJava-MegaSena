@@ -2,7 +2,6 @@ package MegaSena;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Impressao {
 	private static Leitor leitor;
