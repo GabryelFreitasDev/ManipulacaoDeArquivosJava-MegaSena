@@ -109,6 +109,4 @@ public class Dados {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	
-	
 }
