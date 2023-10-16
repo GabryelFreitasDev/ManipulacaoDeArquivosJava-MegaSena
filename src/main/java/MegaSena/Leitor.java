@@ -94,7 +94,7 @@ public class Leitor {
 	        }
 	}
 	
-	public List<Entry<Integer, Integer>>  getQuantidadeVezesNumeroFoiSorteado() {
+	public List<Entry<Integer, Integer>> getQuantidadeVezesNumeroFoiSorteado() {
 		List<Entry<Integer, Integer>> listaNumeroQuantidade = new ArrayList<>();
 		
 		listaDados.forEach(dado -> {

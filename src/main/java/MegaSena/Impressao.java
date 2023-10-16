@@ -40,7 +40,7 @@ public class Impressao {
 				+ Util.formataIntParaString(leitor.getQuantidadeGanhadoresComXDezenas(quantidadeDezenas)));
 	}
 	
-	protected  List<Integer> recebeDezenasParaSorteio() {
+	protected List<Integer> recebeDezenasParaSorteio() {
 		List<Integer> dezenas = new ArrayList<>();
 		System.out.println("\nDigite as dezenas que deseja verificar: ");
 		for(int dezena = 1; dezena <= 6; dezena++) {
@@ -67,13 +67,13 @@ public class Impressao {
 		}
 	}
 	
-	protected  void imprimeDezenasAleatoriasParaSorteio() {
+	protected void imprimeDezenasAleatoriasParaSorteio() {
 		List<Integer> dezenasAleatoriasParaSorteio = leitor.getDezenasAleatoriasParaSorteio();
 		System.out.print("\nDezenas geradas aleatoriamente: ");
 		imprimeDezenasJaSorteadas(dezenasAleatoriasParaSorteio);
 	}
 	
-	protected  void imprimeTodasAsInformaçoes() {
+	protected void imprimeTodasAsInformacoes() {
 		imprimeQuantidadeConcursosNaoHouveApostadorQueAcertou6Dezenas();
 		imprimeQuantidadeVezesNumeroFoiSorteado(0);
 		imprimeMenorValorPagoParaApostasComXDezenasSorteadas(4);
@@ -88,7 +88,7 @@ public class Impressao {
 	}
 	
 	private static void imprimeDezenas(List<Integer> dezenas) {
-		for (int dezena = 0; dezena < dezenas.size(); dezena ++)
+		for (int dezena = 0; dezena < dezenas.size(); dezena++)
 		    System.out.print(dezenas.get(dezena) + (dezena < dezenas.size() - 1 ? " - " : ""));
 	}
 }

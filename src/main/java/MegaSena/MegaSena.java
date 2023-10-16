@@ -96,7 +96,7 @@ public class MegaSena {
 						impressao.imprimeQuantidadeGanhadoresComXDezenas(6);
 						break;
 					case 12:
-						impressao.imprimeTodasAsInformaçoes();
+						impressao.imprimeTodasAsInformacoes();
 						break;
 					case 13:
 						List<Integer> dezenas = impressao.recebeDezenasParaSorteio();
